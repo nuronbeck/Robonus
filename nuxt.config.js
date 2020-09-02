@@ -81,8 +81,7 @@ export default {
       langDir: 'locales/',
       locales: [
         { code: 'en', iso: 'us', file: 'en.json' },
-        { code: 'ru', iso: 'ru', file: 'ru.json' },
-        { code: 'cn', iso: 'cn', file: 'cn.json' }
+        { code: 'ru', iso: 'ru', file: 'ru.json' }
       ],
       defaultLocale: 'en',
       vueI18n: {

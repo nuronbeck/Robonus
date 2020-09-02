@@ -291,6 +291,9 @@ export default {
         // Check user balance is not less than requested
         if(parseFloat(this.newWidthdrawal.countRocoins) > parseFloat(this.userBalance)){
           this.$swal.fire({
+            customClass: {
+              container: 'swal_custom_index'
+            },
             position: 'center',
             icon: 'error',
             title: this.$t("Your scores isn't enought!")
@@ -299,6 +302,9 @@ export default {
         else {
           this.$swal.fire({
             title: this.$t('Enter account password key'),
+            customClass: {
+              container: 'swal_custom_index'
+            },
             input: 'text',
             inputAttributes: {
               autocapitalize: 'off'
@@ -331,6 +337,9 @@ export default {
               })
               .catch(() => {
                 this.$swal.fire({
+                  customClass: {
+                    container: 'swal_custom_index'
+                  },
                   position: 'center',
                   icon: 'error',
                   title: this.$t('Server error 404'),
@@ -343,6 +352,9 @@ export default {
           }).then((result) => {
             if (result.value == "Success") {
               this.$swal.fire({
+                customClass: {
+                  container: 'swal_custom_index'
+                },
                 position: 'center',
                 icon: 'success',
                 title: this.$t('Successfully submitted!'),
@@ -359,6 +371,9 @@ export default {
 
       } else {
         this.$swal.fire({
+          customClass: {
+            container: 'swal_custom_index'
+          },
           position: 'center',
           icon: 'error',
           title: this.$t('Something filled wrong! Please check your creditials!')
@@ -375,6 +390,9 @@ export default {
           }
           else {
             this.$swal.fire({
+              customClass: {
+                container: 'swal_custom_index'
+              },
               position: 'center',
               icon: 'error',
               title: this.$t('User not found!'),
@@ -393,5 +411,8 @@ export default {
 <style>
 .columsCentered {
   text-align: center;
+}
+.swal_custom_index{
+  z-index: 9999;
 }
 </style>
