@@ -1,0 +1,28 @@
+{
+  "name": "Robonus",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@nuxtjs/axios": "^5.12.0",
+    "@nuxtjs/fontawesome": "^1.1.2",
+    "nuxt": "^2.14.0",
+    "nuxt-fontawesome": "^0.4.0",
+    "nuxt-i18n": "^6.13.12",
+    "nuxt-sweetalert2": "^1.0.0",
+    "nuxt-vue-select": "^0.1.4",
+    "vue-flag-icon": "^1.0.6",
+    "vue-good-table": "^2.21.0",
+    "vue-sweetalert2": "^3.0.7",
+    "vuelidate": "^0.7.5",
+    "vuesax": "^4.0.1-alpha.23"
+  },
+  "devDependencies": {}
+}
