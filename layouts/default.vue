@@ -3,7 +3,7 @@
     <vs-navbar
       shadow 
       fixed
-      
+      :style="{ zIndex: '500' }"
     >
       <img class="siteImage" src="../assets/RoBonus.svg" alt="Robonus logo" />
 

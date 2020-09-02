@@ -413,6 +413,6 @@ export default {
   text-align: center;
 }
 .swal_custom_index{
-  z-index: 9999;
+  z-index: 99999;
 }
 </style>
