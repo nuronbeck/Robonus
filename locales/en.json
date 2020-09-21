@@ -17,6 +17,7 @@
     "Under consideration": "Under consideration",
     "Paid out": "Paid out",
     "Rejected": "Rejected",
+    "Not in group": "Not in group",
     "Withdrawal history is empty.": "Withdrawal history is empty.",
     "Date": "Date",
     "Nickname": "Nickname",
@@ -37,5 +38,8 @@
     "Sorry, there are not enough Robux on the site. Please try to submit your withdrawal request later!": "Sorry, there are not enough Robux on the site. Please try to submit your withdrawal request later!",
     "Server error:": "Server error:",
     "Successfully submitted!": "Successfully submitted!",
-    "Something filled wrong! Please check your creditials!": "Something filled wrong! Please check your creditials!"
+    "Something filled wrong! Please check your creditials!": "Something filled wrong! Please check your creditials!",
+    "Moderation": "Moderation",
+    "You have 1 or more pending withdrawal tickets. Please try again later!": "You have 1 or more pending withdrawal tickets. Please try again later!",
+    "New group for robux delivery. Please Join In before creating a withdrawal request!": "New group for robux delivery. Please Join In before creating a withdrawal request!"
 }

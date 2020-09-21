@@ -147,7 +147,15 @@
 
                   <span :style="{ borderRadius: '3px', backgroundColor: '#fa3232', color: '#fff', padding: '4px' }" v-if="props.row.status == 2" >
                     {{ $t('Rejected') }}
-                  </span> 
+                  </span>
+                  
+                  <span :style="{ borderRadius: '3px', backgroundColor: 'rgb(250, 191, 50)', color: '#fff', padding: '4px' }" v-if="props.row.status == 3" >
+                    {{ $t('Moderation') }}
+                  </span>
+
+                  <span :style="{ borderRadius: '3px', backgroundColor: '#fa3232', color: '#fff', padding: '4px' }" v-if="props.row.status == 4" >
+                    {{ $t('Not in group') }}
+                  </span>
               </div>
             </template>
             <div slot="emptystate" :style="{ textAlign: 'center' }">
@@ -300,72 +308,43 @@ export default {
           })
         }
         else {
-          this.$swal.fire({
-            title: this.$t('Enter account password key'),
-            customClass: {
-              container: 'swal_custom_index'
-            },
-            input: 'text',
-            inputAttributes: {
-              autocapitalize: 'off'
-            },
-            showCancelButton: true,
-            confirmButtonText: this.$t('Submit'),
-            cancelButtonText: this.$t('Cancel'),
-            showLoaderOnConfirm: true,
-            preConfirm: (authPassword) => {
-              return this.$axios.post(`/robonus_auth.php`, { 
-                id: this.$route.query.id,
-                passwordCode: authPassword,
-                nickname: this.newWidthdrawal.robloxNickname,
-                count_rocoins: this.newWidthdrawal.countRocoins,
-                count_robux: this.newWidthdrawal.countRobux
-              })
-              .then((response) => { 
-                if(response.data == "CredentialsError"){
-                  this.$swal.showValidationMessage(this.$t('Credentials Error!'))
-                }
-                if(response.data == "PasswordError"){
-                  this.$swal.showValidationMessage(this.$t(`Password isn't valid!`))
-                }
-                if(response.data == "StockError"){
-                  this.$swal.showValidationMessage(this.$t(`Sorry, there are not enough Robux on the site. Please try to submit your withdrawal request later!`))
-                }
-                if(response.data == "Success"){
-                  return response.data
-                } 
-              })
-              .catch(() => {
-                this.$swal.fire({
-                  customClass: {
-                    container: 'swal_custom_index'
-                  },
-                  position: 'center',
-                  icon: 'error',
-                  title: this.$t('Server error 404'),
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-              })
-            },
-            allowOutsideClick: () => !this.$swal.isLoading()
-          }).then((result) => {
-            if (result.value == "Success") {
-              this.$swal.fire({
-                customClass: {
-                  container: 'swal_custom_index'
-                },
-                position: 'center',
-                icon: 'success',
-                title: this.$t('Successfully submitted!'),
-                showConfirmButton: false,
-                timer: 1500
-              })
-
-              this.newWidthdrawal.robloxNickname = ''
-              this.loadUserInitData()
-            }
-          })
+          if(parseInt(this.conditions.NewGroup) === 1){
+            this.$swal.fire({
+              customClass: {
+                container: 'swal_custom_index'
+              },
+              position: 'center',
+              icon: 'warning',
+              html:  `
+                <div class="vs-alert vs-change-color" style="--vs-color: 255,71,87; height: 113px;">
+                  <div class="vs-alert__content" style="min-height: 114px;">
+                    <div class="vs-alert__content__text">
+                      <div style="text-align: center;">
+                        ${this.$t("New group for robux delivery. Please Join In before creating a withdrawal request!")}
+                      </div>
+                      <div style="text-align: center;">
+                        <button class="vs-button vs-button--primary vs-button--size-null vs-button--flat vs-change-color" style="--vs-color: 25, 91, 255;">
+                          <a href="${this.conditions.GroupLink}" target="_blank" >
+                            <div class="vs-button__content vs-button--primary">
+                              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="external-link-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-external-link-alt fa-w-16" style="margin-right: 5px;"><path fill="currentColor" d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z" class=""></path></svg>
+                              ${this.conditions.GroupLink}
+                            </div>
+                          </a>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `,
+            })
+            .then((result) => {
+              if(result.value){
+                this.submitModalStart()
+              }
+            })
+          } else {
+            this.submitModalStart()
+          }
 
         }
 
@@ -400,6 +379,77 @@ export default {
           }
         })
       }
+    },
+    submitModalStart(){
+      this.$swal.fire({
+        title: this.$t('Enter account password key'),
+        customClass: {
+          container: 'swal_custom_index'
+        },
+        input: 'text',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: this.$t('Submit'),
+        cancelButtonText: this.$t('Cancel'),
+        showLoaderOnConfirm: true,
+        preConfirm: (authPassword) => {
+          return this.$axios.post(`/robonus_auth.php`, { 
+            id: this.$route.query.id,
+            passwordCode: authPassword,
+            nickname: this.newWidthdrawal.robloxNickname,
+            count_rocoins: this.newWidthdrawal.countRocoins,
+            count_robux: this.newWidthdrawal.countRobux
+          })
+          .then((response) => { 
+            if(response.data == "CredentialsError"){
+              this.$swal.showValidationMessage(this.$t('Credentials Error!'))
+            }
+            if(response.data == "PasswordError"){
+              this.$swal.showValidationMessage(this.$t(`Password isn't valid!`))
+            }
+            if(response.data == "StockError"){
+              this.$swal.showValidationMessage(this.$t(`Sorry, there are not enough Robux on the site. Please try to submit your withdrawal request later!`))
+            }
+            if(response.data == "PendingTicketsError"){
+              this.$swal.showValidationMessage(this.$t(`You have 1 or more pending withdrawal tickets. Please try again later!`))
+            }
+            if(response.data == "Success"){
+              return response.data
+            } 
+          })
+          .catch(() => {
+            this.$swal.fire({
+              customClass: {
+                container: 'swal_custom_index'
+              },
+              position: 'center',
+              icon: 'error',
+              title: this.$t('Server error 404'),
+              showConfirmButton: false,
+              timer: 1500
+            })
+          })
+        },
+        allowOutsideClick: () => !this.$swal.isLoading()
+      }).then((result) => {
+        if (result.value == "Success") {
+          this.$swal.fire({
+            customClass: {
+              container: 'swal_custom_index'
+            },
+            position: 'center',
+            icon: 'success',
+            title: this.$t('Successfully submitted!'),
+            showConfirmButton: false,
+            timer: 1500
+          })
+
+          this.newWidthdrawal.robloxNickname = ''
+          this.loadUserInitData()
+        }
+      })
     }
   },
   mounted(){

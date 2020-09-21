@@ -17,6 +17,7 @@
     "Under consideration": "На рассмотрении",
     "Paid out": "Выплачена",
     "Rejected": "Отклонена",
+    "Not in group": "Нет в группе",
     "Withdrawal history is empty.": "История выводов пустая",
     "Date": "Дата",
     "Nickname": "Никнейм",
@@ -37,5 +38,8 @@
     "Sorry, there are not enough Robux on the site. Please try to submit your withdrawal request later!": "Извините, в сервисе недостаточно Robux-ов. Пожалуйста, попробуйте отправить запрос на вывод позже!",
     "Server error:": "Ошибка сервера:",
     "Successfully submitted!": "Успешно отправлено!",
-    "Something filled wrong! Please check your creditials!": "Что-то заполнено неправильно! Пожалуйста, проверьте ваши данные!"
+    "Something filled wrong! Please check your creditials!": "Что-то заполнено неправильно! Пожалуйста, проверьте ваши данные!",
+    "Moderation": "Модерация",
+    "You have 1 or more pending withdrawal tickets. Please try again later!": "У вас есть 1 или несколько необработанных заявок на вывод робуксов. Пожалуйста, попробуйте позже!",
+    "New group for robux delivery. Please Join In before creating a withdrawal request!": "Новая группа для выдачи Robux. Пожалуйста вступите в неё перед созданием заявки на вывод!"
 }
