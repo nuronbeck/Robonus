@@ -77,15 +77,15 @@
               </template>
             </vs-input>
 
-            <div :style="{ paddingTop: '15px' }">
+            <div v-if="false" :style="{ paddingTop: '15px' }">
               <vs-alert color="danger" v-if="conditions"> 
                 <div :style="{ textAlign: 'center' }">
                   {{ $t('Before create a request you') }}
                 </div>
                 <div :style="{ textAlign: 'center' }">
-                  <b>{{ $t('must join') }}</b> {{ $t('to group in Roblox:') }}
+                  <b>{{ $t('must join') }}</b> <a :href="conditions.GroupLink" target="_blank">{{ $t('to group in Roblox') }} </a>
                 </div>
-                <div :style="{ textAlign: 'center' }">
+                <div v-if="false" :style="{ textAlign: 'center' }">
                   <vs-button
                     :href="conditions.GroupLink"
                     blank
@@ -316,18 +316,20 @@ export default {
               position: 'center',
               icon: 'warning',
               html:  `
-                <div class="vs-alert vs-change-color" style="--vs-color: 255,71,87; height: 113px;">
-                  <div class="vs-alert__content" style="min-height: 114px;">
+                <div class="vs-alert vs-change-color" style="--vs-color: 255,71,87;">
+                  <div class="vs-alert__content">
                     <div class="vs-alert__content__text">
                       <div style="text-align: center;">
-                        ${this.$t("New group for robux delivery. Please Join In before creating a withdrawal request!")}
+                        ${this.$t(`Before create a request you`)}
+                        <a style="text-decoration: none;" href="${ this.conditions.GroupLink }" target="_blank"> <b>${this.$t(`must join`)}</b> </a>
+                        ${this.$t(`to group in Roblox`)} 
                       </div>
-                      <div style="text-align: center;">
+                      <div style="text-align: center; display: flex; align-items: center; justify-content: center;">
                         <button class="vs-button vs-button--primary vs-button--size-null vs-button--flat vs-change-color" style="--vs-color: 25, 91, 255;">
                           <a href="${this.conditions.GroupLink}" target="_blank" >
                             <div class="vs-button__content vs-button--primary">
                               <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="external-link-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-external-link-alt fa-w-16" style="margin-right: 5px;"><path fill="currentColor" d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z" class=""></path></svg>
-                              ${this.conditions.GroupLink}
+                              ${this.$t(`Join group now`)}
                             </div>
                           </a>
                         </button>
@@ -464,5 +466,9 @@ export default {
 }
 .swal_custom_index{
   z-index: 99999;
+}
+.swal2-icon.swal2-warning {
+  border-color: #ff3042 !important;
+  color: #ff3042 !important;
 }
 </style>
